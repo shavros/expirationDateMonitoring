@@ -3,3 +3,5 @@ openshift:
   namespaces: yournamespace
   passwords: yourpasswords
   token: serviceaccounttoken
+monitor:
+  delay: delay in millis

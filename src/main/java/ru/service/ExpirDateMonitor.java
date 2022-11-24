@@ -2,6 +2,7 @@ package ru.service;
 
 import io.kubernetes.client.openapi.models.V1Secret;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import ru.configs.CustomSecret;
@@ -27,7 +28,7 @@ public class ExpirDateMonitor {
      *
      * Через определенный промежуток времени показывает информацию по сроку действия сертификатов
      */
-    @Scheduled(fixedRate = 20000)
+    @Scheduled(fixedDelayString = "${monitor.delay}")
     public void monitorExpirDates() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, IOException {
         SecretsGetter getter = new SecretsGetter();
         List<V1Secret> standardSecrets = getter.getJksSecretList(osconf);
